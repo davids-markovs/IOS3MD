@@ -39,10 +39,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
             Saulkrasti.coordinate = CLLocationCoordinate2D(latitude: 57.268759, longitude: 24.426470)
             Controler.addAnnotation(Saulkrasti)
             print("Console actually works!!!")
-            
-            
-            
-            
             locationManage()
             
         }
@@ -111,14 +107,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDele
   
         Controler.delegate = self
 
-        let sourcePlaceMark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 57.529617 , longitude: 25.42035))
+        if #available(iOS 8.0, *) {
+           let sourcePlaceMark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 57.529617 , longitude: 25.42035))
+        } else {
+            // Fallback on earlier versions
+        }
         let source = MKMapItem(placemark: sourcePlaceMark)
         let directionRequest = MKDirections.Request()
-
         directionRequest.source = source
         
         
-        let destinationPlaceMark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 57.268759, longitude: 24.426470))
+        if #available(iOS 8.0, *) {
+            let destinationPlaceMark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 57.268759, longitude: 24.426470))
+        } else {
+            // Fallback on earlier versions
+        }
         let destinationMapItem = MKMapItem(placemark: destinationPlaceMark)
         directionRequest.destination = destinationMapItem
         directionRequest.transportType = .automobile
